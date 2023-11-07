@@ -1,0 +1,37 @@
+# CAP cap-sqlite-demo
+_out
+*.db
+connection.properties
+default-*.json
+.cdsrc-private.json
+
+node_modules/
+target/
+
+# Web IDE, App Studio
+.che/
+.gen/
+gen/
+
+# MTA
+*_mta_build_tmp
+*.mtar
+mta_archives/
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+# .idea

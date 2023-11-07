@@ -1,0 +1,27 @@
+{
+    "xsappname": "cap-sqlite-demo",
+    "tenant-mode": "dedicated",
+    "description": "A sample XSUAA for a demo CAP SQLite application",
+    "scopes": [
+        {
+            "name": "uaa.user",
+            "description": "UAA"
+        }
+    ],
+    "attributes": [],
+    "role-templates": [
+        {
+            "name": "Token_Exchange",
+            "description": "UAA",
+            "scope-references": [
+                "uaa.user"
+            ]
+        }
+    ],
+    "oauth2-configuration": {
+        "redirect-uris": [
+            "https://*.applicationstudio.cloud.sap/**",
+            "https://*.cfapps.eu10.hana.ondemand.com/**"
+        ]
+    }
+}

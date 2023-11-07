@@ -1,0 +1,30 @@
+{
+    "welcomeFile": "interaction_items/webapp/index.html",
+    "authenticationMethod": "route",
+    "routes": [
+        {
+            "source": "/catalog/(.*)",
+            "target": "/catalog/$1",
+            "destination": "srv-api",
+            "csrfProtection": true,
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "/v2/catalog/(.*)",
+            "target": "/v2/catalog/$1",
+            "destination": "srv-api",
+            "csrfProtection": true,
+            "authenticationType": "xsuaa"
+        },
+        {
+            "source": "^/user-api(.*)",
+            "target": "$1",
+            "service": "sap-approuter-userapi"
+        },
+        {
+            "source": "/(.*)",
+            "localDir": ".",
+            "authenticationType": "xsuaa"
+        }
+    ]
+}

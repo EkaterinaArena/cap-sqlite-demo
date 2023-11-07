@@ -1,0 +1,90 @@
+{
+  "name": "cap-sqlite-demo",
+  "version": "1.1.0",
+  "description": "A simple CAP project with SQLite DB and CI/CD",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/sqlite": "^1.0.1",
+    "@dynatrace/oneagent-sdk": "^1.4.1",
+    "@sap-cloud-sdk/http-client": "^3.4.0",
+    "@sap-cloud-sdk/odata-v2": "^3.4.0",
+    "@sap/cds": "^7",
+    "@sap/cds-dk": "^7",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+    "@sap/xsenv": "^3.4.0",
+    "@sap/xssec": "^3.2.18",
+    "@sap-cloud-sdk/resilience": "^3.4.0",
+    "express": "^4",
+    "passport": "^0.4.1",
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds deploy && cds run",
+    "build:mta": "rimraf resources mta_archives && mbt build --mtar cap-sqlite-demo",
+    "deploy": "cf deploy mta_archives/cap-sqlite-demo.mtar",
+    "dev:db-sync": "cds deploy --to sqlite:db.sqlite"
+  },
+  "engines": {
+    "node": "^18"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      },
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "GW_SAMPLE_BASIC": {
+        "kind": "odata",
+        "model": "srv/external/GWSAMPLE_BASIC",
+        "credentials": {
+          "destination": "ES5_SS",
+          "path": "/sap/opu/odata/IWBEP/GWSAMPLE_BASIC"
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "destination": "apihub_sandbox",
+          "path": "/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+        }
+      }
+    }
+  },
+  "sapux": [
+    "app/interaction_items"
+  ]
+}

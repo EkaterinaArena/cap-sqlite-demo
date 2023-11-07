@@ -1,0 +1,13 @@
+/node_modules/
+package-lock.json
+
+
+
+
+
+# auto generated wildcard
+scm-sapcap-pal2-service/.env1
+# auto generated wildcard
+MyCAPDemo/.env1
+# auto generated wildcard
+cap-sample/db/.env

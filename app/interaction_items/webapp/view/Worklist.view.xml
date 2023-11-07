@@ -1,0 +1,92 @@
+<mvc:View
+	controllerName="interactionitems.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" />
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table
+				id="table"
+				width="auto"
+				items="{
+					path: '/Interactions_Items',
+					sorter: {
+						path: 'INTHeader_ID',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<Toolbar>
+						<Title id="tableHeader"/>
+						<ToolbarSpacer />
+						<SearchField
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search=".onSearch"
+							width="auto">
+						</SearchField>
+					</Toolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="unitTextColumn">
+						<Text text="Text ID" id="unitTextColumnTitle"/>
+					</Column>
+                    <Column id="unitNumberColumn">
+						<Text text="Interaction HeaderID" id="unitNumberColumnTitle"/>
+					</Column>
+                    <Column id="nameColumn">
+						<Text text="Log Text" id="nameColumnTitle"/>
+					</Column>
+					<Column id="languageColumn" hAlign="End">
+						<Text text="Language Code" id="languageColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press=".onPress">
+						<cells>
+							<ObjectNumber
+								number="{
+									path: 'TEXT_ID'
+								}"
+								unit="{}"/>
+                            <ObjectNumber
+								number="{
+									path: 'INTHeader_ID'
+								}"
+								unit="{}"/>
+                            <ObjectIdentifier
+								title="{LOGTEXT}"/>
+							<ObjectIdentifier
+								title="{LANGU}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
